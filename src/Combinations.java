@@ -9,7 +9,7 @@ public class Combinations {
     public static boolean RoyalFlash(List<Card> personCards){
         int count=0;
         int consequency=0;
-        int[] cntType  = new int[] {0,0,0,0};
+        int value2=0;
         Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
         Map<String,Integer> numMap =new HashMap<>();
         for (CardType value : values) {
@@ -23,13 +23,187 @@ public class Combinations {
             addNum(numMap,card.getCardNum());
         }
         for (CardType value : values) {
-            if(typeMap.get(value)==5){
+            if(typeMap.get(value)>=5){
+                count++;
+                break;
+            }
+            for (int i = 0; i < numbers.size()-1; i++) {
+                int value1=numMap.get(value);
+                if(value1>=1 && value2>=1){
+                    consequency=+1;
+                }
+                else if(consequency<5){
+                    consequency=0;
+                }
+            }
+            value2=numMap.get(value);
+        }
+        if(consequency>=5&& count==1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean FourOfKind(List<Card> personCards){
+        boolean cnt = false;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (String number : numbers) {
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            for (int i = 0; i < numbers.size()-1; i++) {
+                if(numMap.get(value)==4){
+                    cnt=true;
+                    break;
+                }
+            }
+        }
+        if(cnt){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean FullHouse(List<Card> personCards) {
+        boolean cnt = false;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (String number : numbers) {
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            for (int i = 0; i < numbers.size()-1; i++) {
+                if(numMap.get(value)==3){
+                    cnt=true;
+                    break;
+                }
+            }
+        }
+        if(cnt){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean Flush(List<Card> personCards) {
+        int count=0;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (CardType value : values) {
+            typeMap.put(value,0);
+        }
+        for (String number : numbers) {
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addType(typeMap,card.getCardType());
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            if(typeMap.get(value)>=5){
                 count++;
                 break;
             }
         }
+        if(count==1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean Straight(List<Card> personCards) {
+        int consequency=0;
+        int value2=0;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (CardType value : values) {
+            typeMap.put(value,0);
+        }
         for (String number : numbers) {
-            if(numbers[])
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addType(typeMap,card.getCardType());
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            for (int i = 0; i < numbers.size()-1; i++) {
+                int value1=numMap.get(value);
+                if(value1>=1 && value2>=1){
+                    consequency=+1;
+                }
+                else if(consequency<5){
+                    consequency=0;
+                }
+            }
+            value2=numMap.get(value);
+        }
+        if(consequency>=5){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean ThreeOfKind(List<Card> personCards){
+        boolean cnt = false;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (String number : numbers) {
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            for (int i = 0; i < numbers.size()-1; i++) {
+                if(numMap.get(value)==3){
+                    cnt=true;
+                    break;
+                }
+            }
+        }
+        if(cnt){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean TwoOfKind(List<Card> personCards){
+        boolean cnt = false;
+        Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
+        Map<String,Integer> numMap =new HashMap<>();
+        for (String number : numbers) {
+            numMap.put(number,0);
+        }
+        for (Card card : personCards) {
+            addNum(numMap,card.getCardNum());
+        }
+        for (CardType value : values) {
+            for (int i = 0; i < numbers.size()-1; i++) {
+                if(numMap.get(value)==2){
+                    cnt=true;
+                    break;
+                }
+            }
+        }
+        if(cnt){
+            return true;
+        }
+        else{
+            return false;
         }
     }
     private static void addType(Map<CardType, Integer> map,CardType key ){
@@ -41,8 +215,3 @@ public class Combinations {
         map.put(key,oldValue+1);
     }
 }
-//for (CardType value : values) {
-//                if(card.getCardType()==value){
-//                    count=count++;
-//                }
-//            }
