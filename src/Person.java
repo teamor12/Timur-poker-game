@@ -10,7 +10,6 @@ public class Person {
     }
     public void addCard(Card cards){
         personCards.add(cards);
-        System.out.println(name+" got "+cards);
     }
     public void printPersonCards(){
         System.out.println(name+" got ");

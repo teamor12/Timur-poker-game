@@ -30,5 +30,10 @@ public class Main {
         comunityCards.addCard(deck.getCard());
         comunityCards.addCard(deck.getCard());
         comunityCards.addCard(deck.getCard());
+
+        Winner winner=new Winner(person.getPersonCards(),person1.getPersonCards(),comunityCards.getPersonCards(),name,name2);
+        winner.result();
+
+
     }
 }
