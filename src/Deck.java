@@ -11,7 +11,7 @@ public class Deck {
        List<String> numbers=List.of("2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace");
         for (String number : numbers) {
             for (CardType value : values) {
-                cardsStack.push(new Card(value,number));
+                cardsStack.push(new Card(value,number, numbers.indexOf(number)+2));
             }
         }
     }

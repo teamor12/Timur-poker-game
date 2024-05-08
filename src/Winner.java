@@ -8,12 +8,12 @@
 
  }
 */
+import java.util.ArrayList;
 import java.util.List;
 
 public class Winner {
-    private List<Card> communityCards;
-    private List<Card> person1Cards;
-    private List<Card> person2Cards;
+    private List<Card> person1Cards=new ArrayList<>();
+    private List<Card> person2Cards=new ArrayList<>();
     private String name1;
     private String name2;
     int bigCard=0;
@@ -22,11 +22,18 @@ public class Winner {
         bigCard=Combinations.BiggestCard(personInitialCards,person1InitialCards);
         person1Cards.addAll(personInitialCards);
         person1Cards.addAll(communityCards);
-
+        System.out.println("person1:");
+        for (Card person1Card : person1Cards) {
+            System.out.println(person1Card);
+        }
         person2Cards.addAll(person1InitialCards);
         person2Cards.addAll(communityCards);
-        name1=this.name1;
-        name2=this.name2;
+        System.out.println("person2");
+        for (Card person2Card : person2Cards) {
+            System.out.println(person2Card);
+        }
+        this.name1=name1;
+        this.name2=name2;
     }
     public int Cards1(){
         int n=0;
@@ -71,12 +78,17 @@ public class Winner {
         return n;
     }
     public void result() {
+
         int first = Cards1();
         int second = Cards2();
         if (first > second) {
-            System.out.println(name1+" is winner");
+            if(first == 0||second == 0) {
+                System.out.println(name2 + " is winner");
+            }
         } else if (second > first) {
-            System.out.println(name2+" player is winner");
+            if(first == 0||second == 0){
+                System.out.println(name1 + " player is winner");
+            }
         } else if (first == second && first == 0) {
             if (bigCard == 1) {
                 System.out.println(name1+" player is winner");
@@ -87,5 +99,7 @@ public class Winner {
         else {
             System.out.println("Tie");
         }
+        System.out.println("first="+first);
+        System.out.println("second="+second);
     }
 }
