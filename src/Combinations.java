@@ -6,7 +6,7 @@ public class Combinations {
 
     public static boolean RoyalFlash(List<Card> personCards) {
         int count = 0;
-        int consequency = 0;
+        int consequency = 1;
         Card value2 ;
         Map<CardType, Integer> typeMap = new EnumMap<>(CardType.class);
         Map<String, Integer> numMap = new HashMap<>();
@@ -19,12 +19,12 @@ public class Combinations {
         for (int i = 0; i < personCards.size()-2; i++) {
             Card value1=personCards.get(i);
             value2=personCards.get(i+1);
+
             int num1=value1.getCardIndex();
             int num2= value2.getCardIndex();
             if((num1+1)==num2){
                 consequency++;
             }
-
         }
         if (consequency == 5 && contains) {
             return true;
@@ -51,8 +51,9 @@ public class Combinations {
         for (Card card : personCards) {
             mergeNum(numMap, card.getCardNum());
         }
-        boolean contains=numMap.values().stream().anyMatch(x->x==3);
-        if (contains) {
+        boolean contains1=numMap.containsValue(3);
+        boolean contains2=numMap.containsValue(2);
+        if (contains1&&contains2) {
             return true;
         } else {
             return false;
@@ -75,7 +76,7 @@ public class Combinations {
 
     public static boolean Straight(List<Card> personCards) {
         int count = 0;
-        int consequency = 0;
+        int consequency = 1;
         Card value2 ;
         Map<String, Integer> numMap = new HashMap<>();
         personCards=sort(personCards);
@@ -118,7 +119,7 @@ public class Combinations {
         }
         long contains=numMap.values().stream().filter(x->x==2).count();
 
-        if (contains==2) {
+        if (contains>=2) {
             return true;
         } else {
             return false;

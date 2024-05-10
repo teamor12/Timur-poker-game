@@ -78,9 +78,32 @@ public class Winner {
         return n;
     }
     public void result() {
-
         int first = Cards1();
         int second = Cards2();
+        System.out.println(name1+"'s combination:");
+        switch (first){
+            case 1-> System.out.println("Royal Flash");
+            case 2-> System.out.println("Four of kind");
+            case 3-> System.out.println("Full house");
+            case 4-> System.out.println("Flush");
+            case 5-> System.out.println("Straight");
+            case 6-> System.out.println("Three of kind");
+            case 7-> System.out.println("Two pair");
+            case 8-> System.out.println("Two of kind");
+            case 0-> System.out.println("No combination");
+        }
+        System.out.println(name2+"'s combination:");
+        switch (second){
+            case 1-> System.out.println("Royal Flash");
+            case 2-> System.out.println("Four of kind");
+            case 3-> System.out.println("Full house");
+            case 4-> System.out.println("Flush");
+            case 5-> System.out.println("Straight");
+            case 6-> System.out.println("Three of kind");
+            case 7-> System.out.println("Two pair");
+            case 8-> System.out.println("Two of kind");
+            case 0-> System.out.println("No combination");
+        }
         if (first > second) {
             if(first == 0||second == 0) {
                 System.out.println(name2 + " is winner");

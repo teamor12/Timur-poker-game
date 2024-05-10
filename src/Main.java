@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
-        distributeCards(scanner);
     }
     public static void distributeCards(Scanner scanner){
         Deck deck =new Deck();
@@ -24,16 +23,14 @@ public class Main {
         person1.addCard(deck.getCard());
 
         System.out.println("");
-        Person comunityCards=new Person("Comunity cards");
-        comunityCards.addCard(deck.getCard());
-        comunityCards.addCard(deck.getCard());
-        comunityCards.addCard(deck.getCard());
-        comunityCards.addCard(deck.getCard());
-        comunityCards.addCard(deck.getCard());
+        Person communityCards=new Person("Comunity cards");
+        communityCards.addCard(deck.getCard());
+        communityCards.addCard(deck.getCard());
+        communityCards.addCard(deck.getCard());
+        communityCards.addCard(deck.getCard());
+        communityCards.addCard(deck.getCard());
 
-        Winner winner=new Winner(person.getPersonCards(),person1.getPersonCards(),comunityCards.getPersonCards(),name,name2);
+        Winner winner=new Winner(person.getPersonCards(),person1.getPersonCards(),communityCards.getPersonCards(),name,name2);
         winner.result();
-
-
     }
 }
