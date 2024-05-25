@@ -1,36 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
+        while(true){
+            System.out.println("Select action to continue");
+            System.out.println();
+            System.out.println("play or break ");
+            String action=scanner.next();
+            switch (action){
+                case "play"->multiplePlay(scanner);
+                case "break" -> {
+                    return;
+                }
+                default -> System.out.println("Error ,try again");
+            }
+        }
     }
-    public static void distributeCards(Scanner scanner){
+    public static void multiplePlay(Scanner scanner){
         Deck deck =new Deck();
         deck.doStack();
         deck.shuffle();
 
-        System.out.println("Enter person name");
-        String name= scanner.next();
-        Person person=new Person(name);
-        person.addCard(deck.getCard());
-        person.addCard(deck.getCard());
+        System.out.println("How many player's will be playing ?");
+        int playerNum= scanner.nextInt();
+        if(playerNum>1) {
+            List<Person> people = new ArrayList<>();
 
-        System.out.println("");
-        System.out.println("Enter opponent's name");
-        String name2=scanner.next();
-        Person person1=new Person(name2);
-        person1.addCard(deck.getCard());
-        person1.addCard(deck.getCard());
+            for (int i = 0; i < playerNum; i++) {
+                System.out.println("Enter person name");
+                String name = scanner.next();
+                Person person = new Person(name);
+                for (int j = 0; j < 2; j++) {
+                    person.addCard(deck.getCard());
+                }
+                person.printPersonCards();
+                people.add(person);
+                System.out.println("");
+            }
+            System.out.println("");
+            Person communityCards = new Person("Comunity cards");
+            communityCards.addCard(deck.getCard());
+            communityCards.addCard(deck.getCard());
+            communityCards.addCard(deck.getCard());
+            communityCards.addCard(deck.getCard());
+            communityCards.addCard(deck.getCard());
+            communityCards.printPersonCards();
 
-        System.out.println("");
-        Person communityCards=new Person("Comunity cards");
-        communityCards.addCard(deck.getCard());
-        communityCards.addCard(deck.getCard());
-        communityCards.addCard(deck.getCard());
-        communityCards.addCard(deck.getCard());
-        communityCards.addCard(deck.getCard());
+            MultipleWinner multipleWinner = new MultipleWinner(people, communityCards.getPersonCards());
+            multipleWinner.winnerFinder();
+        }
+        else {
+            System.out.println("You should have at least 2 people to play");
 
-        Winner winner=new Winner(person.getPersonCards(),person1.getPersonCards(),communityCards.getPersonCards(),name,name2);
-        winner.result();
+        }
     }
+
 }

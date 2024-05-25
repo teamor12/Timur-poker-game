@@ -112,7 +112,7 @@ public class Combinations {
             return false;
         }
     }
-    public static boolean TwoPair(List<Card> personCards){
+    public static boolean Pair(List<Card> personCards){
         Map<String, Integer> numMap = new HashMap<>();
         for (Card card : personCards) {
             mergeNum(numMap, card.getCardNum());
@@ -151,9 +151,21 @@ public class Combinations {
             return 2;
         }
     }
+
+    public static Card returnBiggestCards(List<Card> personCards1 , List<Card> personCards2,int playerCard){
+        Card card1=compare(personCards1);
+        Card card2=compare(personCards2);
+        if(playerCard==1){
+            return card1;
+        }
+        else{
+             return card2;
+        }
+    }
+
     public static Card compare(List<Card> personCards){
         personCards=sort(personCards);
-        return personCards.get(personCards.size() - 1);
+        return personCards.get(personCards.size()-1);
     }
 
     private static void mergeType(Map<CardType, Integer> map, CardType key) {
@@ -164,7 +176,7 @@ public class Combinations {
         map.merge(key,1 , (oldValue , newValue)->newValue+oldValue);
     }
     public static List<Card> sort(List<Card> personcards) {
-        Collections.sort(personcards, Comparator.comparingInt(card -> numbers.indexOf(card.getCardNum())));
+        Collections.sort(personcards, Comparator.comparingInt(card ->card.getCardIndex()));
         return personcards;
     }
 
