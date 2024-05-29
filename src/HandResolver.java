@@ -1,13 +1,13 @@
 import java.util.List;
 
 public class HandResolver {
-    private List<Card> personCards;
+    private final List<Card> personCards;
     public HandResolver(List<Card> personCards) {
         this.personCards=personCards;
     }
 
     public int gameComb(){
-        int n=0;
+        int n;
         if(Combinations.RoyalFlash(personCards)){
             n=1;
         } else if (Combinations.FourOfKind(personCards)) {
@@ -20,7 +20,7 @@ public class HandResolver {
             n=5;
         } else if (Combinations.ThreeOfKind(personCards)) {
             n=6;
-        } else if (Combinations.Pair(personCards)) {
+        } else if (Combinations.TwoPair(personCards)) {
             n=7;
         } else if (Combinations.TwoOfKind(personCards)) {
             n=8;
@@ -38,8 +38,9 @@ public class HandResolver {
             case 4-> System.out.println("Flush");
             case 5-> System.out.println("Straight");
             case 6-> System.out.println("Three of kind");
-            case 7-> System.out.println("Pair");
+            case 7-> System.out.println("Two Pair");
             case 8-> System.out.println("Two of kind");
+            case 9-> System.out.println("No combination");
         }
     }
 }

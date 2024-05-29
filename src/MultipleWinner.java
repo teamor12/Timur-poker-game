@@ -2,8 +2,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class MultipleWinner {
-    List<Person> people =new ArrayList<>();
-    List<Card> communityCards=new ArrayList<>();
+    List<Person> people;
+    List<Card> communityCards;
     Map<Integer,List<Person>> winnersMap=new HashMap<>();
 
     public MultipleWinner(List<Person> people, List<Card> communityCards) {
@@ -12,7 +12,6 @@ public class MultipleWinner {
     }
 
     public void winnerFinder(){
-        List<Integer> combinations=new ArrayList<>();
         for (Person person : people) {
             List<Card> handCards=new ArrayList<>();
             for (int i = 0; i < 2; i++) {
@@ -23,6 +22,7 @@ public class MultipleWinner {
             }
             HandResolver handResolver=new HandResolver(handCards);
             int combination=handResolver.gameComb();
+            handResolver.printComb();
             if (!winnersMap.containsKey(combination)) {
                 winnersMap.put(combination,List.of(person));
             }
@@ -35,13 +35,12 @@ public class MultipleWinner {
         }
         Optional<Map.Entry<Integer,List<Person>>> max= winnersMap.entrySet()
                 .stream()
-                .min(Comparator.comparing(x->x.getKey()));
+                .min(Map.Entry.comparingByKey());
         boolean present= max.isPresent();
         if(!present){
             return;
         }
         Map.Entry<Integer, List<Person>> entry=max.get();
-        Integer key=entry.getKey();
         List<Person> personList=entry.getValue();
 
         if(personList.size()>1){
@@ -49,11 +48,8 @@ public class MultipleWinner {
                     .collect(Collectors.toMap(person -> person.biggestCard().orElse(null), person -> person,
                             (existing, replacement) -> existing));
             if(collect.size()>1){
-                System.out.println("We have "+collect.size()+" winners");
-                Collection<Person> values=collect.values();
-                for (Person value : values) {
-                    System.out.println(value.getName()+"is winner");
-                }
+                Optional<Person> person = collect.values().stream().max(Comparator.comparing(x -> x.biggestCard().get().getCardIndex()));
+                person.ifPresent(System.out::println);
             }
             else {
                 Collection<Person> values=collect.values();

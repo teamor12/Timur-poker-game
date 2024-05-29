@@ -27,6 +27,7 @@ public class CheckCombRunner {
                 case 7 -> {
                     return;
                 }
+                default -> System.out.println("Error ,try again");
             }
         }
     }
@@ -251,7 +252,7 @@ public class CheckCombRunner {
 
         Person person2=new Person(name2);
         person2.addCard(new Card(CardType.Heart,"5",5));
-        person2.addCard(new Card(CardType.Diamonds,"9",9));
+        person2.addCard(new Card(CardType.Diamonds,"King",14));
         person2.printPersonCards();
 
         people.add(person1);

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Person {
-    private String name;
+    private final String name;
     public List<Card> personCards=new ArrayList<>();
 
     public Person(String name) {
@@ -30,9 +30,14 @@ public class Person {
         return personCards;
     }
     public Optional<Card> biggestCard() {
-        Optional<Card> card = personCards.stream()
-                .max(Comparator.comparing(x -> x.getCardIndex()));
-        return card;
+        return personCards.stream()
+                .max(Comparator.comparing(Card::getCardIndex));
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

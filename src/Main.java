@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
         while(true){
+            System.out.println();
             System.out.println("Select action to continue");
             System.out.println();
             System.out.println("play or break ");
@@ -17,6 +19,9 @@ public class Main {
                 }
                 default -> System.out.println("Error ,try again");
             }
+            if(Objects.equals("break",action)){
+                break;
+            }
         }
     }
     public static void multiplePlay(Scanner scanner){
@@ -26,7 +31,7 @@ public class Main {
 
         System.out.println("How many player's will be playing ?");
         int playerNum= scanner.nextInt();
-        if(playerNum>1) {
+        if(playerNum>1&&playerNum<11) {
             List<Person> people = new ArrayList<>();
 
             for (int i = 0; i < playerNum; i++) {
@@ -51,10 +56,11 @@ public class Main {
 
             MultipleWinner multipleWinner = new MultipleWinner(people, communityCards.getPersonCards());
             multipleWinner.winnerFinder();
-        }
-        else {
+        } else if(playerNum>=11){
+            System.out.println("Too much players can not play poker");
+            System.out.println("Select less player number");
+        } else {
             System.out.println("You should have at least 2 people to play");
-
         }
     }
 
